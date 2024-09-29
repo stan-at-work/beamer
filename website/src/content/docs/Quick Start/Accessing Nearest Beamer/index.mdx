@@ -1,0 +1,38 @@
+---
+title: Accessing Nearest Beamer Delegate
+description: How to access the nearest Beamer delegate in the widget tree.
+---
+
+You may need to access route attributes (such as parameters from the URL) in your widgets to render the appropriate content. For example, if you're displaying a `BookDetailsScreen`, you might need to get the `bookId` from the current route to load the correct book information.
+
+Beamer allows you to access these route attributes through the **Beamer delegate**. The delegate holds the current navigation state, which you can use to retrieve the parameters from the URL.
+
+---
+
+### Accessing Route Attributes in Widgets
+
+You can access route parameters inside a widget's `build` method using Beamer's `Beamer.of(context)` function. This function retrieves the nearest Beamer delegate from the widget tree. From this delegate, you can access the `currentBeamLocation` and its `state`, which contains the path parameters like `bookId`.
+
+#### Example:
+
+Here’s how you can access the `bookId` inside a widget:
+
+```dart
+@override
+Widget build(BuildContext context) {
+  // Get the current Beamer delegate's state
+  final beamState = Beamer.of(context).currentBeamLocation.state as BeamState;
+
+  // Retrieve the 'bookId' from the path parameters
+  final bookId = beamState.pathParameters['bookId'];
+
+  // Use the bookId to build the BookDetailsScreen
+  return BookDetailsScreen(bookId: bookId);
+}
+```
+
+#### Explanation:
+
+1. **Beamer.of(context)**: This function is used to find the nearest Beamer delegate in the widget tree, which provides access to the current state of navigation.
+2. **currentBeamLocation.state**: The current navigation location has an associated state, where all the navigation details are stored.
+3. **pathParameters['bookId']**: The `pathParameters` contains any URL parameters, like `bookId`, which were defined in your app's routes. You can use this to retrieve specific data for the widget you are building.

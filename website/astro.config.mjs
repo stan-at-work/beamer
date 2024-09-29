@@ -17,7 +17,7 @@ export default defineConfig({
                 },
                 {
                     label: 'Quick Start',
-                    items: ['quick-start/routes-stack-builder', 'quick-start/navigating', 'quick-start/navigating-back'],
+                    items: ['quick-start/routes-stack-builder', 'quick-start/navigating', 'quick-start/navigating-back', 'quick-start/accessing-nearest-beamer'],
                 },
                 {
                     label: 'Key Concepts',

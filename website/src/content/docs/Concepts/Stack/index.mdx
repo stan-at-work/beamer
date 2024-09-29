@@ -15,14 +15,31 @@ A BeamStack has 3 important rules:
 
 BeamStack is a abstract class that needs to be extended to use. The purpose of having multiple Stack's is to architecturally separate unrelated _places_ in an application.
 
-| Stack             | Description                     |
-| -------------------- | ------------------------------- |
-| **BooksStack**    | Everything related to books.    |
-| **ArticleStack**  | Everything related to articles. |
-| **CustomerStack** | Everything related to customer. |
-| **SettingStack**  | Everything related to settings. |
-| **AuthStack**     | Everything related to auth.     |
+---
 
-#### Example
+-   When extending **BeamStack**, two methods need to be implemented: `pathPatterns` and `buildPages`.
+
+    -   `buildPages` returns a stack of pages that will be built by Navigator when you beam there, and pathPatterns is there for Beamer to decide which BeamStack handles which URI.
+    -   `BeamStack` keeps query and path parameters from URI in its BeamState. The `:` is necessary in pathPatterns if you might get path parameter from browser.
+
+-   BeamPage's child is an arbitrary Widget that represents your app screen/page.
+    -   `key` is important for Navigator to optimize rebuilds. This needs to be a unique value. (e.g. [ValueKey](https://api.flutter.dev/flutter/foundation/ValueKey-class.html)) for "page state". (see [Page Keys](#page-keys))
+    -   `BeamPage` creates `MaterialPageRoute` by default, but other transitions can be chosen by setting `BeamPage.type` to one of available `BeamPageType`.
+
+### Example
 
 <BeamStackExample />
+
+### Page Keys
+
+When we beam somewhere, we are putting a new list of pages into `Navigator.pages`.
+
+Now the Navigator has to decide on the transition between the old list of pages and the new list of pages.
+
+In order to know which pages changed and which pages stayed the same, Navigator looks at the pages' keys.
+
+If the keys of 2 pages that are compared are equal (important here: `null == null`), Navigator treats them as the same page and does **not rebuild nor replace** that page.
+
+One should **always** set a `BeamPage.key` (most likely a [ValueKey](https://api.flutter.dev/flutter/foundation/ValueKey-class.html)).
+
+If keys are not set or the keys are changed when a state change occurs, after beaming somewhere via e.g. `Beamer.of(context).beamToNamed('/somewhere')`, no change will happen in the UI. The new BeamPage doesn't build since Navigator thinks it is the same as the already displayed one.

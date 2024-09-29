@@ -1,8 +1,49 @@
 ---
-title: Why Beamer
-description: Welcome to the beamer documentation
+title: Beamer
+description: What is Beamer?
 ---
 
-There was a time, sometime in late 2020, when Beamer was just a routing part of a particular application, serving it pretty well in production. It seemed reasonable to share it on pub.dev, but then a name needed to be coined. I believe it took at least a month to settle on a name. The idea was to have a simple and descriptive name, but this was not so easy as many of the most obvious choices are already taken: Router, Navigator, ...
+### What is Beamer?
 
-At the time I was watching the Star Trek series and it just hit me! We're doing a pretty similar thing as teleportation - taking the user to an entirely new stack of pages each time they navigate, as if they are being teleported to that part of the application. A slightly better word than "teleporter" is "beamer" as it's also kind of similar to the "router" - what Beamer really is under the hood (Router widget).
+There was a time, sometime in late 2020, when Beamer was just a routing part of a particular application, serving it pretty well in production. It seemed reasonable to share it on pub.dev, but then a name needed to be coined. I believe it took at least a month to settle on a name.
+
+The idea was to have a simple and descriptive name, but this was not so easy as many of the most obvious choices are already taken: Router, Navigator, ...
+
+At the time I was watching the Star Trek series and it just hit me! We're doing a pretty similar thing as teleportation - taking the user to an entirely new stack of pages each time they navigate, as if they are being teleported to that part of the application.
+
+A slightly better word than "teleporter" is "beamer" as it's also kind of similar to the "router" - what Beamer really is under the hood (Router widget).
+
+### Beamer on a high level
+
+At the highest level, Beamer is a wrapper for Router and uses its own implementations for RouterDelegate and RouteInformationParser.
+
+The goal of Beamer is to separate the responsibility of building a page stack for Navigator.pages into multiple classes with different states, instead of one global state for all page stacks.
+
+For example, we would like to handle all the profile related page stacks such as:
+
+-   `[ ProfilePage ]`
+-   `[ ProfilePage, FriendsPage]`
+-   `[ ProfilePage, FriendsPage, FriendDetailsPage ]`
+-   `[ ProfilePage, SettingsPage ]`
+-   ...
+
+With some "ProfileHandler" that knows which "state" corresponds to which page stack.
+
+Then similarly, we would like to have a "ShopHandler" for all the possible stacks of shop related pages such as:
+
+-   `[ ShopPage ]`
+-   `[ ShopPage, CategoriesPage ]`
+-   `[ ShopPage, CategoriesPage, ItemsPage ]`
+-   `[ ShopPage, CategoriesPage, ItemsPage, ItemDetailsPage ]`
+-   `[ ShopPage, ItemsPage, ItemDetailsPage ], [ ShopPage, CartPage ]`
+-   ...
+
+These "Handlers" are called BeamLocation's.
+
+BeamLocation's cannot work by themselves. When the RouteInformation comes into the app via deep-link, as initial or as a result of beaming, there must be a decision which BeamLocation will further handle this RouteInformation and build pages for the Navigator.
+
+This is the job of `BeamerDelegate.locationBuilder` that will take the RouteInformation and give it to appropriate BeamLocation based on pathPatterns it supports.
+
+BeamLocation will then create and save its own state from it to use for building a page stack.
+
+![Diagram](/src/assets/flow_diagram.png)

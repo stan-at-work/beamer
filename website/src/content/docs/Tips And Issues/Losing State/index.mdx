@@ -1,0 +1,28 @@
+---
+title: Losing State
+discription: Losing state when the tree rebuild's
+---
+
+The problem is that during hot reloads or when the entire Flutter app is rebuilt, the navigation state managed by Beamer can be lost. This means that the app may not remember the current route or state, causing unexpected behavior or a return to the initial route.
+
+#### Solution
+
+To prevent this loss of state, the solution is to move the `BeamerRouterDelegate` to a variable **outside** of the `build` method. This ensures that the router delegate remains intact during rebuilds, preserving the navigation state.
+
+#### Example
+
+```dart
+class MyApp extends StatelessWidget {
+    //I'm outside of the build method
+    final _routerDelegate = BeamerRouterDelegate(...);
+
+    @override
+    Widget build(BuildContext context) {
+        return MaterialApp.router(
+            routeInformationParser: BeamerRouteInformationParser(),
+            routerDelegate: _routerDelegate,
+            ...
+        );
+    }
+}
+```

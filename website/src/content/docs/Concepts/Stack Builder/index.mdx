@@ -1,0 +1,42 @@
+---
+title: Stack Builder
+discription: Stack Builder Concept
+---
+
+import BeamStackExample from '../../../../components/concepts/BeamStackExample.astro';
+
+There are two other options available, if we don't want to define a custom locationBuilder ourselves.
+
+#### With a List of BeamLocations
+
+BeamerLocationBuilder can be used with a list of BeamLocations. This builder will automatically select the correct BeamLocation based on its pathPatterns or return a NotFound if none matches.
+
+```dart
+final routerDelegate = BeamerDelegate(
+  locationBuilder: BeamerLocationBuilder(
+    beamLocations: [
+      HomeLocation(),
+      BooksLocation(),
+    ],
+  ),
+);
+```
+
+#### With a Map of Routes
+
+We can use the RoutesLocationBuilder with a map of routes, as mentioned in <a href='/quick-start/routes-stack-builder'>Quick Start</a>. This completely removes the need for custom BeamLocations, but also gives the least amount of customization. Still, wildcards and path parameters are supported as with all the other options.
+
+```dart
+final routerDelegate = BeamerDelegate(
+  locationBuilder: RoutesLocationBuilder(
+    routes: {
+      '/': (context, state, data) => HomeScreen(),
+      '/books': (context, state, data) => BooksScreen(),
+      '/books/:bookId': (context, state, data) =>
+        BookDetailsScreen(
+          bookId: state.pathParameters['bookId'],
+        ),
+    },
+  ),
+);
+```

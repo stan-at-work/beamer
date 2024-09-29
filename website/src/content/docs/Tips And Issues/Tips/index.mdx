@@ -1,0 +1,12 @@
+---
+title: Remove '#' from the URL
+discription: Tips for beamer
+---
+
+Removing the # from URL can be done by calling `Beamer.setPathUrlStrategy()` before `runApp()`.
+
+```dart
+Beamer.setPathUrlStrategy();
+
+runApp(MyApp());
+```

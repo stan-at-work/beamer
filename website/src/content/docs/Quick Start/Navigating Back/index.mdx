@@ -1,0 +1,82 @@
+---
+title: Navigating Back
+description: Navigating back using Beamer.
+---
+
+There are two types of backward navigation, i.e., reverse navigation:
+
+-   **Upward**
+-   **Reverse Chronological**
+
+#### Example Scenario
+
+Let's start with an example:
+
+-   You are currently on `www.beamer.dev`.
+-   You click on a link that takes you to a page at `www.books.com/books/night-witches`.
+-   Once you're on that site, you press the back button on your browser.
+-   You are taken back to `www.beamer.dev`.
+
+But why...
+
+Why do you return to `www.beamer.dev` and not to `www.books.com/books`? You might expect to go back one level, perhaps to `www.books.com/books`, right?
+
+Well, that's because the browser uses a system called **Reverse Chronological Navigation** (also known as beaming back).
+
+If you want to navigate to `www.books.com/books` from `www.books.com/books/night-witches`, that's not possible in most browsers. This is because the browser maintains a history of the states you have visited. When you press the back button, it simply returns to the previous state.
+
+Since you were never on the URL `www.books.com/books`, it's impossible for the browser to take you there from `www.books.com/books/night-witches`.
+
+When using the native Flutter routing system, the roles are reversed. Flutter's navigation takes you back to `www.books.com/books` from `www.books.com/books/night-witches` and not `www.beamer.dev`. But what if you want to be able to navigate back to `www.beamer.dev` from `www.books.com/books/night-witches`, like the default browser behavior?
+
+Because of Flutter's native routing, it's impossible to navigate back to `www.beamer.dev` from `www.books.com/books/night-witches`.
+
+#### Beamer to the Rescue
+
+This is where Beamer comes in. Beamer solves this issue by allowing you to choose which type of navigation you want to use, whether it's upward navigation or reverse chronological navigation.
+
+With Beamer, you have control over how users navigate within your app, making it possible to move back in a way that best fits your app's needs.
+
+---
+
+### Upward Navigation
+
+Upward navigation "pops" a **page** from the stack.
+
+Upward navigation refers to navigating to a previous page in the current page stack. This is commonly referred to as "pop" and is handled by Flutter's `Navigator` methods such as `pop` or `maybePop`. The default AppBar's back button also triggers this behavior if no other action is specified.
+
+#### Example
+
+Here's an example of how to manually navigate back using Flutter's internal `maybePop` function:
+
+```dart
+Navigator.of(context).maybePop();
+```
+
+---
+
+### Reverse Chronological Navigation
+
+Reverse chronological navigation "beams" to the previous **state**. If no previous state exists, nothing happens.
+
+Reverse chronological navigation refers to navigating back to the state you were in before. Beamer maintains a navigation history called `beamingHistory`, which allows you to navigate chronologically to a previous entry in that history.
+
+This action is known as **beaming back**.
+
+Browsers also use reverse chronological navigation for their back buttons, though they rely on their own internal mechanics rather than Beamer's `beamBack` function.
+
+#### Example
+
+Here's an example of how to manually navigate back using the `beamBack` function:
+
+```dart
+// Directly on the delegate
+beamDelegate.beamBack();
+
+// Or, from the UI using context
+Beamer.of(context).beamBack();
+```
+
+---
+
+This version corrects the spelling and grammar errors, while keeping the content clear and concise.

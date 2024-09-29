@@ -11,29 +11,22 @@ export default defineConfig({
                 discord: 'https://discord.com/invite/8hDJ7tP5Mz',
             },
             sidebar: [
-                { 
+                {
                     label: 'Getting Started',
                     items: ['getting-started/install', 'getting-started/about'],
                 },
-                { 
+                {
                     label: 'Quick Start',
-                    items: ['quick-start/routes-stack-builder'],
+                    items: ['quick-start/routes-stack-builder', 'quick-start/navigating', 'quick-start/navigating-back'],
                 },
-                { 
+                {
                     label: 'Key Concepts',
-                    items: [
-                        'concepts/stack',
-                        'concepts/state',
-                        'concepts/guard',
-                        'concepts/interceptor',
-                        'concepts/nested-navigation',
-                        'concepts/navigating',
-                    ],
+                    items: ['concepts/stack', 'concepts/state', 'concepts/guard', 'concepts/interceptor', 'concepts/nested-navigation'],
                 },
                 {
                     label: 'Contributing',
                     items: ['contributing'],
-                }
+                },
             ],
         }),
     ],

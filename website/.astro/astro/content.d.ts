@@ -156,77 +156,84 @@ declare module 'astro:content' {
   slug: "concepts/guard";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
 "Concepts/Interceptor/index.mdx": {
 	id: "Concepts/Interceptor/index.mdx";
   slug: "concepts/interceptor";
   body: string;
   collection: "docs";
-  data: any
-} & { render(): Render[".mdx"] };
-"Concepts/Navigating/index.mdx": {
-	id: "Concepts/Navigating/index.mdx";
-  slug: "concepts/navigating";
-  body: string;
-  collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
 "Concepts/Nested Navigation/index.mdx": {
 	id: "Concepts/Nested Navigation/index.mdx";
   slug: "concepts/nested-navigation";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
 "Concepts/Stack/index.mdx": {
 	id: "Concepts/Stack/index.mdx";
   slug: "concepts/stack";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
 "Concepts/State/index.mdx": {
 	id: "Concepts/State/index.mdx";
   slug: "concepts/state";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
 "Contributing/index.mdx": {
 	id: "Contributing/index.mdx";
   slug: "contributing";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
 "Getting Started/About/index.mdx": {
 	id: "Getting Started/About/index.mdx";
   slug: "getting-started/about";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
 "Getting Started/Install/index.mdx": {
 	id: "Getting Started/Install/index.mdx";
   slug: "getting-started/install";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"Quick Start/Navigating Back/index.mdx": {
+	id: "Quick Start/Navigating Back/index.mdx";
+  slug: "quick-start/navigating-back";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"Quick Start/Navigating/index.mdx": {
+	id: "Quick Start/Navigating/index.mdx";
+  slug: "quick-start/navigating";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
 "Quick Start/Routes Stack Builder/index.mdx": {
 	id: "Quick Start/Routes Stack Builder/index.mdx";
   slug: "quick-start/routes-stack-builder";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
 "index.mdx": {
 	id: "index.mdx";
   slug: "index";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
 };
 
@@ -238,5 +245,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = never;
+	export type ContentConfig = typeof import("./../../src/content/config.js");
 }

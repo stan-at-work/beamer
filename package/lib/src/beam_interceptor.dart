@@ -1,16 +1,17 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/widgets.dart';
 
-/// IDK LOL
 class BeamInterceptor {
   /// Creates a [BeamInterceptor] with defined properties.
   ///
-  /// [pathPatterns] and [intercept] must not be null.
-  const BeamInterceptor({
+  /// [enabled] is `true` by default.
+  /// [name] This is the name of the interceptor. Must be unique.
+  /// [intercept] predecate that returns `true` if the interceptor should be applied and `false` otherwise.
+  BeamInterceptor({
     this.enabled = true,
     required this.name,
     required this.intercept,
-  });
+  }) : assert(name.isNotEmpty, '[name] must not be empty');
 
   final String name;
 

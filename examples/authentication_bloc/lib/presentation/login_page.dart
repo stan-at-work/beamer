@@ -43,7 +43,7 @@ class LoginForm extends StatelessWidget {
               FlutterLogo(size: 128),
               Text(
                 'Login',
-                style: Theme.of(context).textTheme.headline2,
+                style: Theme.of(context).textTheme.displayMedium,
               ),
               _UsernameInput(
                 email: context.read<LoginBloc>().state.username.value,

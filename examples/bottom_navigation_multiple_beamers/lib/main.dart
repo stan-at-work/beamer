@@ -205,7 +205,7 @@ class _AppScreenState extends State<AppScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final uriString = Beamer.of(context).configuration.location!;
+    final uriString = Beamer.of(context).configuration.location;
     currentIndex = uriString.contains('books') ? 0 : 1;
   }
 

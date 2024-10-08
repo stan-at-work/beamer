@@ -7,7 +7,7 @@ class AllowScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BeamInterceptorPopScope(
+    return BeamInterceptorScope(
       interceptors: [allowNavigatingInterceptor],
       beamerDelegate: beamerDelegate,
       child: Scaffold(

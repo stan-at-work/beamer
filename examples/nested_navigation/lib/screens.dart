@@ -24,7 +24,7 @@ class _MenuButtonState extends State<MenuButton> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) => widget
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) => widget
         .beamer.currentState?.routerDelegate
         .addListener(_setStateListener));
   }
@@ -38,8 +38,8 @@ class _MenuButtonState extends State<MenuButton> {
           widget.beamer.currentState?.routerDelegate.beamToNamed(widget.uri),
       style: ButtonStyle(
         backgroundColor: path.contains(widget.uri)
-            ? MaterialStateProperty.all<Color>(Colors.green)
-            : MaterialStateProperty.all<Color>(Colors.blue),
+            ? WidgetStateProperty.all<Color>(Colors.green)
+            : WidgetStateProperty.all<Color>(Colors.blue),
       ),
       child: widget.child,
     );

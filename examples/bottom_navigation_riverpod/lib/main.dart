@@ -460,7 +460,7 @@ class AppScreenState extends ConsumerState<AppScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final location = Beamer.of(context).configuration.location!;
+    final location = Beamer.of(context).configuration.location;
     debugLog("AppScreenState | didChangeDependencies() | "
         "uriString read from Beamer.of(context): $location");
     bottomNavBarIndex = location.contains('books') ? 0 : 1;
@@ -568,34 +568,32 @@ void main() async {
       final location = routeInformation.location;
 
       Future(() {
-        if (location != null) {
+        debugLog("routerDelegate | routeListener() | "
+            "about to save location: $location");
+
+        if (location.startsWith('/home/books') ||
+            location.startsWith('/home/articles')) {
+          container
+              .read(navigationStateControllerProvider.notifier)
+              .setLastLocation(location);
           debugLog("routerDelegate | routeListener() | "
-              "about to save location: $location");
-
-          if (location.startsWith('/home/books') ||
-              location.startsWith('/home/articles')) {
-            container
-                .read(navigationStateControllerProvider.notifier)
-                .setLastLocation(location);
-            debugLog("routerDelegate | routeListener() | "
-                "just saved last location: $location");
-          }
-
-          if (location.startsWith('/home/books')) {
-            container
-                .read(navigationStateControllerProvider.notifier)
-                .setBooksLocation(location);
-            debugLog("routerDelegate | routeListener() | "
-                "just saved books location: $location");
-          } else if (location.startsWith('/home/articles')) {
-            container
-                .read(navigationStateControllerProvider.notifier)
-                .setArticlesLocation(location);
-            debugLog("routerDelegate | routeListener() | "
-                "just saved articles location: $location");
-          }
+              "just saved last location: $location");
         }
-      });
+
+        if (location.startsWith('/home/books')) {
+          container
+              .read(navigationStateControllerProvider.notifier)
+              .setBooksLocation(location);
+          debugLog("routerDelegate | routeListener() | "
+              "just saved books location: $location");
+        } else if (location.startsWith('/home/articles')) {
+          container
+              .read(navigationStateControllerProvider.notifier)
+              .setArticlesLocation(location);
+          debugLog("routerDelegate | routeListener() | "
+              "just saved articles location: $location");
+        }
+            });
     },
     guards: [
       BeamGuard(

@@ -19,100 +19,80 @@ void main() {
       final guard = BeamGuard(
         pathPatterns: [pathBlueprint],
         check: (_, __) => true,
-        beamTo: (context, _, __, ___) =>
-            Stack2(RouteInformation(uri: Uri.parse('/'))),
+        beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
       );
 
-      expect(guard.shouldGuard(testStack), isTrue);
+      expect(guard.shouldCheckGuard(testStack), isTrue);
     });
 
-    test(
-        'is true if the stack (which has a query part) has a blueprint matching the guard',
-        () {
+    test('is true if the stack (which has a query part) has a blueprint matching the guard', () {
       final guard = BeamGuard(
         pathPatterns: [pathBlueprint],
         check: (_, __) => true,
-        beamTo: (context, _, __, ___) =>
-            Stack2(RouteInformation(uri: Uri.parse('/'))),
+        beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
       );
 
-      expect(guard.shouldGuard(testStackWithQuery), isTrue);
+      expect(guard.shouldCheckGuard(testStackWithQuery), isTrue);
     });
 
-    test('is true if the stack has a blueprint matching the guard using regexp',
-        () {
+    test('is true if the stack has a blueprint matching the guard using regexp', () {
       final guard = BeamGuard(
         pathPatterns: [RegExp(pathBlueprint)],
         check: (_, __) => true,
-        beamTo: (context, _, __, ___) =>
-            Stack2(RouteInformation(uri: Uri.parse('/'))),
+        beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
       );
 
-      expect(guard.shouldGuard(testStack), isTrue);
+      expect(guard.shouldCheckGuard(testStack), isTrue);
     });
 
-    test(
-        'is true if the stack (which has a query part) has a blueprint matching the guard using regexp',
-        () {
+    test('is true if the stack (which has a query part) has a blueprint matching the guard using regexp', () {
       final guard = BeamGuard(
         pathPatterns: [RegExp(pathBlueprint)],
         check: (_, __) => true,
-        beamTo: (context, _, __, ___) =>
-            Stack2(RouteInformation(uri: Uri.parse('/'))),
+        beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
       );
 
-      expect(guard.shouldGuard(testStackWithQuery), isTrue);
+      expect(guard.shouldCheckGuard(testStackWithQuery), isTrue);
     });
 
-    test("is false if the stack doesn't have a blueprint matching the guard",
-        () {
+    test("is false if the stack doesn't have a blueprint matching the guard", () {
       final guard = BeamGuard(
         pathPatterns: ['/not-a-match'],
         check: (_, __) => true,
-        beamTo: (context, _, __, ___) =>
-            Stack2(RouteInformation(uri: Uri.parse('/'))),
+        beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
       );
 
-      expect(guard.shouldGuard(testStack), isFalse);
+      expect(guard.shouldCheckGuard(testStack), isFalse);
     });
 
-    test(
-        "is false if the stack (which has a query part) doesn't have a blueprint matching the guard",
-        () {
+    test("is false if the stack (which has a query part) doesn't have a blueprint matching the guard", () {
       final guard = BeamGuard(
         pathPatterns: ['/not-a-match'],
         check: (_, __) => true,
-        beamTo: (context, _, __, ___) =>
-            Stack2(RouteInformation(uri: Uri.parse('/'))),
+        beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
       );
 
-      expect(guard.shouldGuard(testStackWithQuery), isFalse);
+      expect(guard.shouldCheckGuard(testStackWithQuery), isFalse);
     });
 
-    test(
-        "is false if the stack doesn't have a blueprint matching the guard using regexp",
-        () {
+    test("is false if the stack doesn't have a blueprint matching the guard using regexp", () {
       final guard = BeamGuard(
         pathPatterns: [RegExp('/not-a-match')],
         check: (_, __) => true,
-        beamTo: (context, _, __, ___) =>
-            Stack2(RouteInformation(uri: Uri.parse('/'))),
+        beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
       );
 
-      expect(guard.shouldGuard(testStack), isFalse);
+      expect(guard.shouldCheckGuard(testStack), isFalse);
     });
 
-    test(
-        "is false if the stack (which has a query part) doesn't have a blueprint matching the guard using regexp",
-        () {
+    test("is false if the stack (which has a query part) doesn't have a blueprint matching the guard using regexp", () {
       final guard = BeamGuard(
         pathPatterns: ['/not-a-match'],
         check: (_, __) => true,
-        beamTo: (context, _, __, ___) =>
-            Stack2(RouteInformation(uri: Uri.parse('/'))),
+        beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
       );
 
-      expect(guard.shouldGuard(testStackWithQuery), isFalse);
+      expect(guard.shouldCheckGuard(testStackWithQuery), isFalse);
     });
 
     group('with wildcards', () {
@@ -126,52 +106,44 @@ void main() {
                 '/*',
           ],
           check: (_, __) => true,
-          beamTo: (context, _, __, ___) =>
-              Stack2(RouteInformation(uri: Uri.parse('/'))),
+          beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
         );
 
-        expect(guard.shouldGuard(testStack), isTrue);
+        expect(guard.shouldCheckGuard(testStack), isTrue);
       });
 
-      test('is true if the stack has a match up to the wildcard using regexp',
-          () {
+      test('is true if the stack has a match up to the wildcard using regexp', () {
         final guard = BeamGuard(
           pathPatterns: [RegExp('(/[a-z]*|[0-9]*/one)')],
           check: (_, __) => true,
-          beamTo: (context, _, __, ___) =>
-              Stack2(RouteInformation(uri: Uri.parse('/'))),
+          beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
         );
 
-        expect(guard.shouldGuard(testStack), isTrue);
+        expect(guard.shouldCheckGuard(testStack), isTrue);
       });
 
-      test("is false if the stack doesn't have a match against the wildcard",
-          () {
+      test("is false if the stack doesn't have a match against the wildcard", () {
         final guard = BeamGuard(
           pathPatterns: [
             '/not-a-match/*',
           ],
           check: (_, __) => true,
-          beamTo: (context, _, __, ___) =>
-              Stack2(RouteInformation(uri: Uri.parse('/'))),
+          beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
         );
 
-        expect(guard.shouldGuard(testStack), isFalse);
+        expect(guard.shouldCheckGuard(testStack), isFalse);
       });
 
-      test(
-          "is false if the stack doesn't have a match against the wildcard using regexp",
-          () {
+      test("is false if the stack doesn't have a match against the wildcard using regexp", () {
         final guard = BeamGuard(
           pathPatterns: [
             RegExp('(/[a-z]*[0-9]/no-match)'),
           ],
           check: (_, __) => true,
-          beamTo: (context, _, __, ___) =>
-              Stack2(RouteInformation(uri: Uri.parse('/'))),
+          beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
         );
 
-        expect(guard.shouldGuard(testStack), isFalse);
+        expect(guard.shouldCheckGuard(testStack), isFalse);
       });
     });
 
@@ -182,55 +154,46 @@ void main() {
             pathBlueprint,
           ],
           check: (_, __) => true,
-          beamTo: (context, _, __, ___) =>
-              Stack2(RouteInformation(uri: Uri.parse('/'))),
+          beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
           guardNonMatching: true,
         );
 
-        expect(guard.shouldGuard(testStack), isFalse);
+        expect(guard.shouldCheckGuard(testStack), isFalse);
       });
 
-      test(
-          'is false if the stack has a blueprint matching the guard using regexp',
-          () {
+      test('is false if the stack has a blueprint matching the guard using regexp', () {
         final guard = BeamGuard(
           pathPatterns: [
             RegExp(pathBlueprint),
           ],
           check: (_, __) => true,
-          beamTo: (context, _, __, ___) =>
-              Stack2(RouteInformation(uri: Uri.parse('/'))),
+          beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
           guardNonMatching: true,
         );
 
-        expect(guard.shouldGuard(testStack), isFalse);
+        expect(guard.shouldCheckGuard(testStack), isFalse);
       });
 
-      test("is true if the stack doesn't have a blueprint matching the guard",
-          () {
+      test("is true if the stack doesn't have a blueprint matching the guard", () {
         final guard = BeamGuard(
           pathPatterns: ['/not-a-match'],
           check: (_, __) => true,
-          beamTo: (context, _, __, ___) =>
-              Stack2(RouteInformation(uri: Uri.parse('/'))),
+          beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
           guardNonMatching: true,
         );
 
-        expect(guard.shouldGuard(testStack), isTrue);
+        expect(guard.shouldCheckGuard(testStack), isTrue);
       });
 
-      test(
-          "is true if the stack doesn't have a blueprint matching the guard using regexp",
-          () {
+      test("is true if the stack doesn't have a blueprint matching the guard using regexp", () {
         final guard = BeamGuard(
           pathPatterns: [RegExp('/not-a-match')],
           check: (_, __) => true,
-          beamTo: (context, _, __, ___) =>
-              Stack2(RouteInformation(uri: Uri.parse('/'))),
+          beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
           guardNonMatching: true,
         );
 
-        expect(guard.shouldGuard(testStack), isTrue);
+        expect(guard.shouldCheckGuard(testStack), isTrue);
       });
 
       group('with wildcards', () {
@@ -244,59 +207,50 @@ void main() {
                   '/*',
             ],
             check: (_, __) => true,
-            beamTo: (context, _, __, ___) =>
-                Stack2(RouteInformation(uri: Uri.parse('/'))),
+            beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
             guardNonMatching: true,
           );
 
-          expect(guard.shouldGuard(testStack), isFalse);
+          expect(guard.shouldCheckGuard(testStack), isFalse);
         });
 
-        test(
-            'is false if the stack has a match up to the wildcard using regexp',
-            () {
+        test('is false if the stack has a match up to the wildcard using regexp', () {
           final guard = BeamGuard(
             pathPatterns: [
               RegExp('/[a-z]+'),
             ],
             check: (_, __) => true,
-            beamTo: (context, _, __, ___) =>
-                Stack2(RouteInformation(uri: Uri.parse('/'))),
+            beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
             guardNonMatching: true,
           );
 
-          expect(guard.shouldGuard(testStack), isFalse);
+          expect(guard.shouldCheckGuard(testStack), isFalse);
         });
 
-        test("is true if the stack doesn't have a match against the wildcard",
-            () {
+        test("is true if the stack doesn't have a match against the wildcard", () {
           final guard = BeamGuard(
             pathPatterns: [
               '/not-a-match/*',
             ],
             check: (_, __) => true,
-            beamTo: (context, _, __, ___) =>
-                Stack2(RouteInformation(uri: Uri.parse('/'))),
+            beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
             guardNonMatching: true,
           );
 
-          expect(guard.shouldGuard(testStack), isTrue);
+          expect(guard.shouldCheckGuard(testStack), isTrue);
         });
 
-        test(
-            "is true if the stack doesn't have a match against the wildcard using regexp",
-            () {
+        test("is true if the stack doesn't have a match against the wildcard using regexp", () {
           final guard = BeamGuard(
             pathPatterns: [
               RegExp('/not-a-match/[a-z]+'),
             ],
             check: (_, __) => true,
-            beamTo: (context, _, __, ___) =>
-                Stack2(RouteInformation(uri: Uri.parse('/'))),
+            beamTo: (context, _, __, ___) => Stack2(RouteInformation(uri: Uri.parse('/'))),
             guardNonMatching: true,
           );
 
-          expect(guard.shouldGuard(testStack), isTrue);
+          expect(guard.shouldCheckGuard(testStack), isTrue);
         });
       });
     });
@@ -315,8 +269,7 @@ void main() {
             BeamGuard(
               pathPatterns: ['/l2'],
               check: (context, loc) => false,
-              beamTo: (context, _, __, ___) =>
-                  Stack1(RouteInformation(uri: Uri.parse('/l1'))),
+              beamTo: (context, _, __, ___) => Stack1(RouteInformation(uri: Uri.parse('/l1'))),
             ),
           ],
         );
@@ -346,8 +299,7 @@ void main() {
             BeamGuard(
               pathPatterns: ['/l2'],
               check: (context, loc) => false,
-              beamTo: (context, _, __, ___) =>
-                  Stack1(RouteInformation(uri: Uri.parse('/l1'))),
+              beamTo: (context, _, __, ___) => Stack1(RouteInformation(uri: Uri.parse('/l1'))),
               replaceCurrentStack: false,
             ),
           ],
@@ -474,9 +426,7 @@ void main() {
   });
 
   group('origin & target stack update', () {
-    testWidgets(
-        'should preserve origin stack query params when forwarded in beamToNamed',
-        (tester) async {
+    testWidgets('should preserve origin stack query params when forwarded in beamToNamed', (tester) async {
       final delegate = BeamerDelegate(
         initialPath: '/1',
         stackBuilder: RoutesStackBuilder(
@@ -491,9 +441,7 @@ void main() {
             check: (context, stack) => false,
             beamToNamed: (context, origin, target, _) {
               final targetState = target.state as BeamState;
-              final destinationUri =
-                  Uri(path: '/1', queryParameters: targetState.queryParameters)
-                      .toString();
+              final destinationUri = Uri(path: '/1', queryParameters: targetState.queryParameters).toString();
 
               return destinationUri;
             },
@@ -513,13 +461,10 @@ void main() {
       await tester.pump();
 
       expect(delegate.configuration.uri.toString(), '/1?param1=a&param2=b');
-      expect(delegate.currentBeamStack.state.routeInformation.uri.toString(),
-          '/1?param1=a&param2=b');
+      expect(delegate.currentBeamStack.state.routeInformation.uri.toString(), '/1?param1=a&param2=b');
     });
 
-    testWidgets(
-        'should preserve origin stack query params when forwarded in beamTo',
-        (tester) async {
+    testWidgets('should preserve origin stack query params when forwarded in beamTo', (tester) async {
       final delegate = BeamerDelegate(
         initialPath: '/l1',
         stackBuilder: (routeInformation, _) {
@@ -534,8 +479,7 @@ void main() {
             check: (context, stack) => false,
             beamTo: (context, origin, target, _) {
               final targetState = target.state as BeamState;
-              final destinationUri = Uri(
-                  path: '/l1', queryParameters: targetState.queryParameters);
+              final destinationUri = Uri(path: '/l1', queryParameters: targetState.queryParameters);
 
               return Stack2()..state = BeamState.fromUri(destinationUri);
             },
@@ -555,8 +499,7 @@ void main() {
       await tester.pump();
 
       expect(delegate.configuration.uri.toString(), '/l1?param1=a&param2=b');
-      expect(delegate.currentBeamStack.state.routeInformation.uri.toString(),
-          '/l1?param1=a&param2=b');
+      expect(delegate.currentBeamStack.state.routeInformation.uri.toString(), '/l1?param1=a&param2=b');
     });
   });
 
@@ -575,8 +518,7 @@ void main() {
     }
 
     BeamStack _createGuardedBeamStack(BeamerDelegate delegate) {
-      return delegate.stackBuilder(
-          RouteInformation(uri: Uri.parse('/guarded')), null);
+      return delegate.stackBuilder(RouteInformation(uri: Uri.parse('/guarded')), null);
     }
 
     test('does nothing', () {
@@ -749,8 +691,7 @@ void main() {
           initialPath: '/guarded',
           routeListener: (_, __) => updateCounter++,
           stackBuilder: RoutesStackBuilder(
-            routes: <Pattern,
-                dynamic Function(BuildContext, BeamState, Object?)>{
+            routes: <Pattern, dynamic Function(BuildContext, BeamState, Object?)>{
               '/ok': (_, __, ___) => Container(),
               '/guarded': (_, __, ___) => Container(),
             },
@@ -786,8 +727,7 @@ void main() {
           initialPath: '/ok',
           routeListener: (_, __) => updateCounter++,
           stackBuilder: RoutesStackBuilder(
-            routes: <Pattern,
-                dynamic Function(BuildContext, BeamState, Object?)>{
+            routes: <Pattern, dynamic Function(BuildContext, BeamState, Object?)>{
               '/ok': (_, __, ___) => Container(),
               '/guarded': (_, __, ___) => Container(),
             },

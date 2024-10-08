@@ -35,7 +35,7 @@ class BeamGuard {
   /// but will not match '/books'. To match '/books' and everything after it,
   /// use '/books*'.
   ///
-  /// See [canHandleGuard] for more details.
+  /// See [shouldCheckGuard] for more details.
   ///
   /// For RegExp:
   /// You can use RegExp instances and the delegate will check for a match using [RegExp.hasMatch]
@@ -99,7 +99,7 @@ class BeamGuard {
   final bool replaceCurrentStack;
 
   /// Whether or not the guard should [check] the [stack].
-  bool shouldGuard(BeamStack stack) {
+  bool shouldCheckGuard(BeamStack stack) {
     final shouldCheckGuard = stack.shouldCheckGuard(this);
     return guardNonMatching ? shouldCheckGuard == false : shouldCheckGuard;
   }
@@ -122,8 +122,7 @@ class BeamGuard {
     onCheckFailed?.call(context, target);
 
     if (showPage != null) {
-      final redirectBeamStack =
-          GuardShowPage(target.state.routeInformation, showPage!);
+      final redirectBeamStack = GuardShowPage(target.state.routeInformation, showPage!);
       if (replaceCurrentStack) {
         delegate.beamToReplacement(redirectBeamStack);
       } else {
@@ -141,13 +140,11 @@ class BeamGuard {
 
     if (beamTo != null) {
       final redirectBeamStack = beamTo!(context, origin, target, deepLink);
-      if (redirectBeamStack.state.routeInformation.uri ==
-          target.state.routeInformation.uri) {
+      if (redirectBeamStack.state.routeInformation.uri == target.state.routeInformation.uri) {
         // just block if this will produce an immediate infinite loop
         return true;
       }
-      if (redirectBeamStack.state.routeInformation.uri ==
-          origin.state.routeInformation.uri) {
+      if (redirectBeamStack.state.routeInformation.uri == origin.state.routeInformation.uri) {
         // just block if redirect is the current route
         return true;
       }

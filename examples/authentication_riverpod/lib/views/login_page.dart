@@ -24,7 +24,7 @@ class LoginPage extends HookConsumerWidget {
               FlutterLogo(size: 128),
               Text(
                 'Login',
-                style: Theme.of(context).textTheme.headline2,
+                style: Theme.of(context).textTheme.displayMedium,
               ),
               UsernameInput(controller: usernameController),
               PasswordInput(controller: passwordController),

@@ -7,7 +7,7 @@ class BlockScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BeamInterceptorPopScope(
+    return BeamInterceptorScope(
       interceptors: [
         blockNavigatingInterceptor,
       ],

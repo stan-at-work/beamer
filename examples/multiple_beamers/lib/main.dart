@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         transitionDelegate: const NoAnimationTransitionDelegate(),
         locationBuilder: RoutesLocationBuilder(
           routes: {
-            '*': (_, __, ___) => HomeScreen(),
+            '*': (_, __, ___) => const HomeScreen(),
           },
         ),
       ),
@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final uri = Beamer.of(context).configuration.location!;
+    final uri = Beamer.of(context).configuration.location;
     _showArticles = true; // uri.contains('articles');
   }
 

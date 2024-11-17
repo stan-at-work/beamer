@@ -52,7 +52,7 @@ class _HeaderState extends State<Header> {
           ),
           Text(
             'Beamer',
-            style: theme.textTheme.headline6!.copyWith(color: Colors.white),
+            style: theme.textTheme.titleLarge!.copyWith(color: Colors.white),
           ),
           const Spacer(),
           IconButton(

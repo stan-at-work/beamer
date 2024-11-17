@@ -8,13 +8,13 @@ class AccessingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(32.0),
+          padding: EdgeInsets.all(32.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               ParagraphTitle('Accessing nearest Beamer'),
               ParagraphText(
                 "Accessing route attributes in Widgets (for example, bookId for building BookDetailsScreen) can be done with",

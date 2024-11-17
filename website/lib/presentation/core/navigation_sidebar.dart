@@ -28,14 +28,14 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
     super.didChangeDependencies();
     _beamer = Beamer.of(context);
     _beamer.removeListener(_setStateListener);
-    WidgetsBinding.instance!.addPostFrameCallback(
+    WidgetsBinding.instance.addPostFrameCallback(
       (_) => _beamer.addListener(_setStateListener),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final path = _beamer.configuration.location!;
+    final path = _beamer.configuration.location;
     final size = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.only(top: _isDrawer ? kToolbarHeight : 0.0),
@@ -176,7 +176,7 @@ class ExpandableNavigationButton extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Text(
               text,
-              style: Theme.of(context).textTheme.button!.copyWith(
+              style: Theme.of(context).textTheme.labelLarge!.copyWith(
                     color: isSelected ? Colors.blue : null,
                   ),
             ),
@@ -215,7 +215,7 @@ class NavigationButton extends StatelessWidget {
               EdgeInsets.only(left: padLeft ? 16.0 : 0.0),
           child: Text(
             text,
-            style: Theme.of(context).textTheme.button!.copyWith(
+            style: Theme.of(context).textTheme.labelLarge!.copyWith(
                   color: isSelected ? Colors.blue : null,
                 ),
           ),

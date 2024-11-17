@@ -18,7 +18,7 @@ class _AppState extends State<App> {
   void initState() {
     super.initState();
     _isDarkTheme =
-        WidgetsBinding.instance!.window.platformBrightness == Brightness.dark;
+        WidgetsBinding.instance.window.platformBrightness == Brightness.dark;
   }
 
   @override

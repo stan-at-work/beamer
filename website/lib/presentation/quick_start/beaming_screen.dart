@@ -7,13 +7,13 @@ class BeamingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(32.0),
+          padding: EdgeInsets.all(32.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               ParagraphTitle('Beaming > Navigating'),
               ParagraphText(
                 "Navigation is done by \"beaming\". One can think of it as teleporting (beaming) to another place in your app. Similar to Navigator.of(context).pushReplacementNamed('/my-route'), but Beamer is not limited to a single page, nor to a push per se. BeamLocations produce a stack of pages that get built when you beam there. Beaming can feel like using many of Navigator's push/pop methods at once.",

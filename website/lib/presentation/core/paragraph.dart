@@ -24,7 +24,7 @@ class ParagraphTitle extends Paragraph {
   @override
   TextStyle? getTextStyle(BuildContext context) => Theme.of(context)
       .textTheme
-      .headline5!
+      .headlineSmall!
       .copyWith(fontWeight: FontWeight.bold);
 }
 
@@ -34,7 +34,7 @@ class ParagraphSubtitle extends Paragraph {
   @override
   TextStyle? getTextStyle(BuildContext context) => Theme.of(context)
       .textTheme
-      .headline6!
+      .titleLarge!
       .copyWith(fontWeight: FontWeight.normal);
 }
 

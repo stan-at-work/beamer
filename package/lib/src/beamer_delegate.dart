@@ -787,7 +787,7 @@ class BeamerDelegate extends RouterDelegate<RouteInformation> with ChangeNotifie
           observers: navigatorObservers,
           transitionDelegate: currentBeamStack.transitionDelegate ?? _currentBeamParameters.transitionDelegate,
           pages: _currentPages,
-          onPopPage: (route, result) => _onPopPage(context, route, result),
+          onPopPage: (route, result) => _onPopPage(context, route, result), // TODO(): THIS NEEDS TO BE LOOKED AT
         );
       },
     );
